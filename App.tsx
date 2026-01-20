@@ -103,22 +103,22 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200">
       {/* Header */}
-      <header className="bg-slate-900/50 backdrop-blur-md sticky top-0 z-50 border-b border-slate-800 py-4 px-6">
+      <header className="bg-slate-900/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-800 py-3 px-6 shadow-md">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
-              <i className="fas fa-landmark text-white"></i>
+            <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center shadow-lg shadow-emerald-500/20">
+              <i className="fas fa-landmark text-white text-sm"></i>
             </div>
-            <h1 className="text-xl font-bold text-white tracking-tight">PFC Companion</h1>
+            <h1 className="text-lg font-bold text-white tracking-tight">PFC</h1>
           </div>
           <div className="flex items-center gap-4">
-            <div className="hidden sm:block text-right">
-              <p className="text-xs text-slate-500 uppercase font-bold tracking-widest">Dashboard of</p>
-              <p className="text-white font-medium">{userName}</p>
+            <div className="hidden xs:block text-right">
+              <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest">User</p>
+              <p className="text-white text-sm font-medium leading-none">{userName}</p>
             </div>
             <button 
-              onClick={() => { localStorage.clear(); window.location.reload(); }}
-              className="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-800 transition-colors"
+              onClick={() => { if(confirm("This will clear all data. Continue?")) { localStorage.clear(); window.location.reload(); } }}
+              className="w-9 h-9 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-800 transition-colors"
               title="Reset Profile"
             >
               <i className="fas fa-user-circle text-slate-400"></i>
@@ -127,9 +127,9 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto p-6 md:py-10 space-y-8">
+      <main className="max-w-7xl mx-auto p-4 md:p-6 lg:py-10 space-y-6 md:space-y-8">
         {/* Dashboard Stats */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
           <DashboardCard 
             title="Total Income" 
             amount={stats.totalIncome} 
@@ -151,15 +151,15 @@ const App: React.FC = () => {
         </section>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Form and Insights Column */}
-          <div className="lg:col-span-4 space-y-8">
+          <div className="lg:col-span-4 space-y-6 md:space-y-8 order-2 lg:order-1">
             <TransactionForm onAdd={handleAddTransaction} />
             <AIInsightsSection transactions={transactions} userName={userName} />
           </div>
 
           {/* History Column */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 order-1 lg:order-2">
             <TransactionTable 
               transactions={transactions} 
               onDelete={handleDeleteTransaction} 
@@ -169,8 +169,8 @@ const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-7xl mx-auto p-6 text-center text-slate-600 text-sm border-t border-slate-900 mt-10">
-        <p>&copy; {new Date().getFullYear()} PFC - Personal Financial Companion. Created with ❤️ for Bangladesh.</p>
+      <footer className="max-w-7xl mx-auto p-6 text-center text-slate-600 text-[10px] uppercase font-bold tracking-widest border-t border-slate-900 mt-10">
+        <p>PFC - Companion for Bangladesh &copy; {new Date().getFullYear()}</p>
       </footer>
     </div>
   );
